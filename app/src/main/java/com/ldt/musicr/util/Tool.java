@@ -5,16 +5,14 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Handler;
-import android.support.annotation.RequiresApi;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import androidx.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -24,19 +22,42 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 
+import com.ldt.musicr.R;
+
 import java.io.File;
 import java.util.ArrayList;
+
+import es.dmoral.toasty.Toasty;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 public class Tool {
     private static final String TAG="Tool";
 
     private static Tool tool;
     private Context context;
+
+    public static int ColorOne = getMostCommonColor();
+    public static int ColorTwo = getBaseColor();
+    public static float AlphaOne = 1;
+    public static float AlphaTwo = 1;
+
     public static void init(Context context) {
         if(tool==null) tool = new Tool();
         tool.context = context;
         Tool.getScreenSize(context);
 
+    }
+
+    public static void vibrate(Context context) {
+        if(context==null) return;
+        Vibrator vibrator = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            vibrator.vibrate(50);
+        }
     }
 
     public void destroy() {
@@ -395,21 +416,11 @@ public class Tool {
     }
     public static void showToast(Context context,String text, int time)
     {
-
-        final Toast toast =   Toast.makeText(context,text,Toast.LENGTH_SHORT);
+      final Toast toast;
+      //toast =  Toasty.warning(context,text,time);
+      toast = Toasty.custom(context,text, R.drawable.emoticon_excited,R.color.library_back_color,time,true,true);
+     // toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL,0,0);
         toast.show();
-        //   TextView textView = (TextView) toast.getView().findViewById(android.R.id.message);
-        //  textView.setBackgroundColor(Color.WHITE);
-        //textView.setTitleColorType(Color.BLACK);
-        //   ((View)textView.getParent()).setBackground(R.drawable.corner_layout);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                toast.cancel();
-
-            }
-        }, time);
     }
     private static boolean drawn = false;
 

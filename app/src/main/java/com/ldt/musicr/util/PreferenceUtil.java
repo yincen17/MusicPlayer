@@ -6,18 +6,14 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.ldt.musicr.App;
 import com.ldt.musicr.R;
 
 
 import java.io.File;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 public final class PreferenceUtil {
     private static final String SONG_CHILD_SORT_ORDER = "song_child_sort_order";
@@ -86,7 +82,23 @@ public final class PreferenceUtil {
 
     private static final String REMEMBER_SHUFFLE = "remember_shuffle";
 
+    private static final String USE_ARTIST_IMAGE_AS_BACKGROUND = "use_artist_image_as_bg";
+    public static final String IN_APP_VOLUME = "in_app_volume";
+    private static final String AUDIO_MIN_DURATION = "audio_min_duration";
+    public static final String BALANCE_VALUE = "balance_value";
+    public static final String THREAD_NUMBER = "thread_number";
+
     private static PreferenceUtil sInstance;
+
+    public boolean isFirstTime() {
+        return isFirstTime;
+    }
+
+    public void setFirstTime(boolean firstTime) {
+        isFirstTime = firstTime;
+    }
+
+    private boolean isFirstTime = true;
 
     private final SharedPreferences mPreferences;
 
@@ -424,10 +436,8 @@ public final class PreferenceUtil {
     }
 
 
-
-
     public final int getSongChildSortOrder() {
-        return mPreferences.getInt(SONG_CHILD_SORT_ORDER,0);
+        return mPreferences.getInt(SONG_CHILD_SORT_ORDER,1);
     }
 
     public final void setSongChildSortOrder(int value) {
@@ -436,7 +446,67 @@ public final class PreferenceUtil {
         editor.apply();
     }
 
+    public final void setIsUsingArtistImageAsBackground(boolean value) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(USE_ARTIST_IMAGE_AS_BACKGROUND,value);
+        editor.apply();;
+    }
+
+    public final boolean isUsingArtistImageAsBackground() {
+        return mPreferences.getBoolean(USE_ARTIST_IMAGE_AS_BACKGROUND,true);
+    }
+
+    public final void setInAppVolume(float value) {
+        if(value<0) value = 0;
+        else if(value>1) value = 1;
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putFloat(IN_APP_VOLUME, value);
+        editor.apply();
+    }
+
+    public final float getInAppVolume() {
+        return mPreferences.getFloat(IN_APP_VOLUME,1);
+    }
+
+    public final void setMinDuration(int value) {
+        if(value<0) value = 0;
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putFloat(AUDIO_MIN_DURATION, value);
+        editor.apply();
+    }
+
+    public final int getMinDuration() {
+        return mPreferences.getInt(AUDIO_MIN_DURATION,10000);
+    }
+
     public SharedPreferences getSharePreferences() {
         return mPreferences;
+    }
+
+    public void notFirstTime() {
+        setFirstTime(false);
+    }
+
+    public float getBalanceValue() {
+        return mPreferences.getFloat(BALANCE_VALUE,0.5f);
+    }
+
+    public final void setBalanceValue(float value) {
+        if(value<0) value = 0;
+        else if(value>1) value = 1;
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putFloat(BALANCE_VALUE, value);
+        editor.apply();
+    }
+
+    public final void setThreadNumber(int value) {
+        if(value<=0) return;
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putFloat(THREAD_NUMBER,value);
+        editor.apply();
+    }
+
+    public final int getThreadNumber() {
+        return mPreferences.getInt(THREAD_NUMBER,6);
     }
 }

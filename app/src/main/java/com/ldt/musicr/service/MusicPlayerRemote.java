@@ -8,22 +8,25 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ldt.musicr.R;
-import com.ldt.musicr.loader.SongLoader;
+import com.ldt.musicr.loader.medialoader.SongLoader;
 import com.ldt.musicr.model.Song;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.WeakHashMap;
 
@@ -128,13 +131,20 @@ public class MusicPlayerRemote {
             if(musicService.isPlaying())
                 musicService.pause();
             else musicService.play();
-        }
+        } else Log.d(TAG, "playOrPause: music service is null");
     }
 
     public static void pauseSong() {
         if (musicService != null) {
             musicService.pause();
         }
+    }
+
+    public static float getInAppVolume() {
+        if(musicService!=null) {
+            return musicService.getInAppVolume();
+        }
+        return -1;
     }
 
     /**
@@ -177,7 +187,7 @@ public class MusicPlayerRemote {
     /**
      * Async
      */
-    public static void openQueue(final ArrayList<Song> queue, final int startPosition, final boolean startPlaying) {
+    public static void openQueue(final List<Song> queue, final int startPosition, final boolean startPlaying) {
         if (!tryToHandleOpenPlayingQueue(queue, startPosition, startPlaying) && musicService != null) {
             musicService.openQueue(queue, startPosition, startPlaying);
         }
@@ -198,7 +208,7 @@ public class MusicPlayerRemote {
         }
     }
 
-    private static boolean tryToHandleOpenPlayingQueue(final ArrayList<Song> queue, final int startPosition, final boolean startPlaying) {
+    private static boolean tryToHandleOpenPlayingQueue(final List<Song> queue, final int startPosition, final boolean startPlaying) {
         if (getPlayingQueue() == queue) {
             if (startPlaying) {
                 playSongAt(startPosition);
@@ -423,6 +433,11 @@ public class MusicPlayerRemote {
                 if (uri.getAuthority() != null && uri.getAuthority().equals("com.android.externalstorage.documents")) {
                     songFile = new File(Environment.getExternalStorageDirectory(), uri.getPath().split(":", 2)[1]);
                 }
+                if (songFile == null) {
+                    String path = getFilePathFromUri(musicService, uri);
+                    if (path != null)
+                        songFile = new File(path);
+                }
                 if (songFile == null && uri.getPath() != null) {
                     songFile = new File(uri.getPath());
                 }
@@ -440,6 +455,30 @@ public class MusicPlayerRemote {
                 //TODO the file is not listed in the media store
             }
         }
+    }
+    @Nullable
+    private static String getFilePathFromUri(Context context, Uri uri)
+    {
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, null, null,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)

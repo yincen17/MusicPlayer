@@ -2,9 +2,9 @@ package com.ldt.musicr.ui.intro;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,14 +36,14 @@ public class IntroStepOneFragment extends SupportFragment implements MainActivit
     @Override
     protected View onCreateView(LayoutInflater inflater, ViewGroup container) {
         getMainActivity().setPermissionListener(this);
-        return inflater.inflate(R.layout.intro_step_one,container,false);
+        return inflater.inflate(R.layout.grant_permission_screen,container,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
-        mSwipeRefresh.setColorSchemeResources(R.color.FlatBlue);
+        mSwipeRefresh.setColorSchemeResources(R.color.flatBlue);
         mSwipeRefresh.setOnRefreshListener(this::refreshData);
     }
 

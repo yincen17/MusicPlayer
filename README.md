@@ -1,12 +1,14 @@
 # RD Music Player - Redefined Music Player
-A pretty UI&UX Music Player
+**A pretty UI&UX Music Player**
 
 ## Features
 * Dark Theme Style with wallpaper as background
-* One activity, all fragments with fancy animation
-* Play preview of a song, audio visualizer progress bar
-* Play Controller is able to be opened anywhere
-* Long tap to show shortcut
+* Single activity, all fragments architecture with fancy animation
+* Play the sample/preview of a song, audio visualizer progress bar
+* Play Controller is able to be opened everywhere
+* Large artist image loading, and can be used as background
+* View lyrics, view song details
+* Metadata editor
 * Learn your hobby, automatically create new playlist
 * etc
 
@@ -16,9 +18,9 @@ The app will be available in Google Play Store soon.
 Comming soon
 ```
 ### APK
-Download apk file here [Music Player v1610](https://github.com/dtrung98/Source/raw/master/music_player_v1610.apk)
+Download apk file here [Music Player v1.2](https://github.com/dtrung98/Source/raw/master/music_player_v1_2.apk)
 ```
-https://github.com/dtrung98/Source/raw/master/music_player_v1610.apk
+https://github.com/dtrung98/Source/raw/master/music_player_v1_2.apk
 ```
 ## Screenshots
 </br>
@@ -27,12 +29,12 @@ https://github.com/dtrung98/Source/raw/master/music_player_v1610.apk
   <tr>
     <td>
 <img width="360"
-src="https://user-images.githubusercontent.com/33343210/57590440-f97e8880-7555-11e9-8752-de58c3661f30.png"/>
+src="https://user-images.githubusercontent.com/33343210/61610738-2c46aa80-ac84-11e9-80fa-bbe8c6d4119a.png"/>
        <td><img width="360"
-src="https://user-images.githubusercontent.com/33343210/54081299-34392a00-4335-11e9-82ef-dcbaea8defdb.png"/>
+src="https://user-images.githubusercontent.com/33343210/61610968-c3abfd80-ac84-11e9-9c8a-7ac5c9e257ff.jpg"/>
     </td>
      <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/54081062-97748d80-4330-11e9-9dcb-7b1eb13149d6.png"/></td>
+src="https://user-images.githubusercontent.com/33343210/61610657-edb0f000-ac83-11e9-8b89-eb205d8ac518.png"/></td>
   </table>
   </div>
 </br>
@@ -40,11 +42,24 @@ src="https://user-images.githubusercontent.com/33343210/54081062-97748d80-4330-1
   <table align="center" border="0" >
   <tr>
     <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/54081173-dc012880-4332-11e9-982b-08458ad1f4ae.png"/></td>
+src="https://user-images.githubusercontent.com/33343210/61611561-45e8f180-ac86-11e9-932a-d0cbcd388048.png"/></td>
      <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/57590480-406c7e00-7556-11e9-8af3-b8234faffa84.png"/></td>
+src="https://user-images.githubusercontent.com/33343210/61611407-e38ff100-ac85-11e9-8b70-f083436cf3d4.png"/></td>
      <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/57590345-5b8abe00-7555-11e9-99bb-0a00cc66fbca.png"/></td>
+src="https://user-images.githubusercontent.com/33343210/61611355-c6f3b900-ac85-11e9-9b0c-c3c3a4734474.png"/></td>
+  </tr>
+</table>
+  </div>
+</br>
+<div align="center">
+  <table align="center" border="0" >
+  <tr>
+    <td> <img width="360"
+src="https://user-images.githubusercontent.com/33343210/61610594-c3f7c900-ac83-11e9-8ccf-1a6d989631d2.png"/></td>
+    <td> <img width="360"
+src="https://user-images.githubusercontent.com/33343210/61611516-2d78d700-ac86-11e9-9187-c53e91a2b891.png"/></td>
+     <td> <img width="360"
+src="https://user-images.githubusercontent.com/33343210/61764970-4eb40180-ae05-11e9-9903-241fa144582b.png"/></td>
   </tr>
 </table>
   </div>
@@ -57,7 +72,7 @@ src="https://user-images.githubusercontent.com/33343210/57590345-5b8abe00-7555-1
 
 ### License
 
-This project is licensed under The GNU General Public License v3.0 - see the [LICENSE.md](/LICENSE) file for details
+* This project is licensed under The GNU General Public License v3.0 - see the [LICENSE.md](/LICENSE) file for details
 
 ### Acknowledgments
 

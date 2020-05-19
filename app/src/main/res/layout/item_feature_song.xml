@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="74dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/ripple_effect">
+    android:background="@drawable/ripple_effect"
+    tools:background="#444444">
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/image"
         android:layout_width="52dp"
@@ -23,25 +24,25 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/artist"
+        app:layout_constraintBottom_toTopOf="@id/description"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintVertical_chainStyle="packed"
         android:textStyle="bold"
         android:textColor="@color/FlatWhite"
-        app:layout_constraintEnd_toStartOf="@id/more"
+        app:layout_constraintEnd_toStartOf="@id/menu_button"
         tools:text="Blame"
         android:textSize="14sp"
         android:ellipsize="end"
         android:maxLines="1"
         android:layout_marginStart="12dp"/>
     <TextView
-        android:id="@+id/artist"
+        android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintEnd_toStartOf="@id/more"
+        app:layout_constraintEnd_toStartOf="@id/menu_button"
         android:textStyle="bold"
         android:textColor="#CCF5F5F5"
         tools:text="KYLE."
@@ -50,7 +51,7 @@
         android:textSize="13sp"
         />
     <ImageView
-        android:id="@+id/more"
+        android:id="@+id/menu_button"
         android:layout_width="74dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,4 +72,4 @@
         android:elevation="1dp"
         android:tint="#394545"
         android:alpha="0.55"/>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

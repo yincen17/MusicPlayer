@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ec="http://schemas.android.com/apk/res-auto"
     tools:context="com.ldt.musicr.ui.nowplaying.NowPlayingController">
-<android.support.constraint.motion.MotionLayout
+<androidx.constraintlayout.motion.widget.MotionLayout
     android:id="@+id/constraint_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/title_panel"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -50,7 +50,7 @@
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button_right"
-            android:text="Scars to your beautiful • Alessia Cara - BRAVO The Hits 2016"
+            tools:text="Scars to your beautiful • Alessia Cara - BRAVO The Hits 2016"
             android:textColor="@color/color_aaa"
             android:gravity="center"
             android:paddingStart="20dp"
@@ -69,7 +69,7 @@
             app:layout_constraintTop_toTopOf="@id/playlist_title"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintEnd_toStartOf="@id/playlist_title"
-            android:text="play in"
+            android:text="@string/play_in"
             android:textColor="#888"
             android:textSize="10sp"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -87,7 +87,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/play_in"
             app:layout_constraintEnd_toStartOf="@id/button_right"
-            android:text="Tất cả bài hát"
+            tools:text="Tất cả bài hát"
             android:textColor="#999"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
@@ -110,12 +110,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/title"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_pause_black_24dp"
+            app:srcCompat="@drawable/ic_pause_black_24dp"
             android:tint="#AAA"
             android:padding="12dp"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="30dp"
         android:layout_height="0dp"
@@ -186,7 +186,7 @@
         android:paddingEnd="8dp"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
-        android:text="02:38 | 04:07"
+        tools:text="02:38 | 04:07"
         android:textColor="@color/FlatWhite"
         android:textSize="10sp"
         android:alpha="0.85"
@@ -196,7 +196,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/visual_seek_bar"
         />
-    <com.ldt.musicr.ui.widget.AudioVisualSeekBar
+    <com.ldt.musicr.ui.widget.view.AudioVisualSeekBar
         android:id="@+id/visual_seek_bar"
         android:layout_width="0dp"
         android:layout_height="120dp"
@@ -210,7 +210,7 @@
 
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_pause_black_24dp"
+        app:srcCompat="@drawable/ic_pause_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="@dimen/bottom_navigation_height"
         app:layout_constraintStart_toStartOf="parent"
@@ -246,12 +246,12 @@
         android:layout_marginStart="20dp"
         />
     <ImageView
-        android:id="@+id/more"
+        android:id="@+id/menu_button"
         android:layout_width="@dimen/now_laying_height_in_minimize_mode"
         android:layout_height="@dimen/now_laying_height_in_minimize_mode"
         app:layout_constraintTop_toBottomOf="@id/title_panel"
         app:layout_constraintStart_toEndOf="parent"
-        android:src="@drawable/ic_more_vert_black_24dp"
+        app:srcCompat="@drawable/ic_more_vert_black_24dp"
         android:padding="12dp"
         android:tint="@color/FlatWhite"
         android:scaleX="0.75"
@@ -260,30 +260,30 @@
         android:background="@drawable/ripple_oval"
         android:focusable="true"
         android:clickable="true"/>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/color_picker_recycler_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintTop_toBottomOf="@id/more"
+        app:layout_constraintTop_toBottomOf="@id/menu_button"
         app:layout_constraintStart_toEndOf="parent"
         tools:listitem="@layout/item_color_picker"
         tools:layoutManager="LinearLayoutManager"
         tools:orientation="horizontal"
         android:alpha="0"/>
-    <android.support.constraint.Group
+    <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="big_title,big_artist,time_text_view,visual_seek_bar"
         android:alpha="0"
         />
-</android.support.constraint.motion.MotionLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
     <View
         android:id="@+id/dim_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/black"
         android:alpha="0"/>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

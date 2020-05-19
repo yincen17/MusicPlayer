@@ -20,7 +20,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
-import android.support.v8.renderscript.*;
+import androidx.renderscript.*;
 
 /**
  * Created by trung on 7/11/2017.
@@ -619,7 +619,7 @@ public final class BitmapEditor {
         float scaleHeight = ((float) newHeight) / height;
         // create A matrix for the manipulation
         Matrix matrix = new Matrix();
-        // resize the bit map
+        // onTap the bit map
         matrix.postScale(scaleWidth, scaleHeight);
         // recreate the new Bitmap
         Bitmap resizedBitmap = Bitmap.createBitmap(image, 0, 0, width, height,

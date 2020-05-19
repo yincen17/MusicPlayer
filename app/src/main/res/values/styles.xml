@@ -1,17 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-
-
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowShowWallpaper">true</item>
+        <item name="android:windowBackground">@color/SplashColor</item>
+        <item name="colorPrimaryDark">@color/FlatWhite</item>
+        <item name="colorPrimary">@color/FlatWhite</item>
+        <item name="colorAccent">@color/flatOrange</item>
+        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+        <item name="colorControlHighlight">#66000000</item>
+    </style>
+    <style name="AppThemeNoWallpaper" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="colorPrimaryDark">@color/FlatWhite</item>
         <item name="colorPrimary">@color/FlatWhite</item>
-        <item name="colorAccent">@color/FlatYellow</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="colorAccent">@color/flatOrange</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
         <item name="colorControlHighlight">#66000000</item>
-
+    </style>
+    <style name="SplashThemeV2" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="colorPrimaryDark">@color/FlatWhite</item>
+        <item name="colorPrimary">@color/FlatWhite</item>
+        <item name="colorAccent">@color/flatOrange</item>
+        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+        <item name="colorControlHighlight">#66000000</item>
     </style>
 
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
@@ -23,15 +34,15 @@
     </style>
 
     <style name="FlatRedTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/FlatRed</item>
-        <item name="colorPrimaryDark">@color/FlatRed</item>
-        <item name="colorAccent">@color/FlatRed</item>
+        <item name="colorPrimary">@color/flatRed</item>
+        <item name="colorPrimaryDark">@color/flatRed</item>
+        <item name="colorAccent">@color/flatRed</item>
     </style>
 
     <style name="Flat_OrangeTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/FlatOrange</item>
-        <item name="colorPrimaryDark">@color/FlatOrange</item>
-        <item name="colorAccent">@color/FlatOrange</item>
+        <item name="colorPrimary">@color/flatOrange</item>
+        <item name="colorPrimaryDark">@color/flatOrange</item>
+        <item name="colorAccent">@color/flatOrange</item>
     </style>
 
     <style name="Flat_YellowTheme" parent="Theme.AppCompat.NoActionBar">
@@ -53,15 +64,15 @@
     </style>
 
     <style name="Flat_BlueTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/FlatBlue</item>
-        <item name="colorPrimaryDark">@color/FlatBlue</item>
-        <item name="colorAccent">@color/FlatBlue</item>
+        <item name="colorPrimary">@color/flatBlue</item>
+        <item name="colorPrimaryDark">@color/flatBlue</item>
+        <item name="colorAccent">@color/flatBlue</item>
     </style>
 
     <style name="Flat_PurpleTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/FlatPurple</item>
-        <item name="colorPrimaryDark">@color/FlatPurple</item>
-        <item name="colorAccent">@color/FlatPurple</item>
+        <item name="colorPrimary">@color/flatPurple</item>
+        <item name="colorPrimaryDark">@color/flatPurple</item>
+        <item name="colorAccent">@color/flatPurple</item>
     </style>
 
     <style name="Flat_PinkTheme" parent="Theme.AppCompat.NoActionBar">
@@ -152,5 +163,14 @@
 
     <style name="TransparentBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="DialogDimDisabled" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.65</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+
     </style>
 </resources>

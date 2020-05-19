@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="@color/backward_color"
-    tools:context="com.ldt.musicr.ui.tabs.pager.PlaylistPagerFragment">
-<android.support.design.widget.AppBarLayout
+    tools:context="com.ldt.musicr.ui.page.subpages.PlaylistPagerFragment">
+<com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:elevation="0dp">
-<android.support.design.widget.CollapsingToolbarLayout
+<com.google.android.material.appbar.CollapsingToolbarLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
    android:id="@+id/playlist_pager_collapsing_toolbar"
     app:layout_scrollFlags="scroll|exitUntilCollapsed"
     app:titleEnabled="false">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -29,14 +29,15 @@
         app:title="@string/playlist"
         app:titleTextColor="@color/FlatWhite">
         <ImageView
-            android:id="@+id/more_playlist"
+            android:id="@+id/menu_button"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
-            android:src="@drawable/ic_more_horiz_black_24dp"
+            app:srcCompat="@drawable/ic_more_horiz_black_24dp"
+            android:background="@drawable/ripple_oval"
             android:tint="@color/FlatWhite"
             android:padding="18dp"
             android:layout_gravity="end"/>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     <RelativeLayout
         app:layout_collapseMode="pin"
         android:layout_width="match_parent"
@@ -76,7 +77,7 @@
                 android:layout_marginEnd="?attr/actionBarSize"
                 android:minHeight="30dp"
                 android:text="@string/songs"
-                android:textColor="@color/FlatOrange"
+                android:textColor="@color/flatOrange"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:maxLines="2"
@@ -85,19 +86,19 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/art"
                 app:layout_constraintTop_toTopOf="@+id/art"
-                app:layout_constraintBottom_toTopOf="@id/artist"
+                app:layout_constraintBottom_toTopOf="@id/description"
                 app:layout_constraintVertical_chainStyle="packed"
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="?attr/actionBarSize" />
 
             <TextView
-                android:id="@+id/artist"
+                android:id="@+id/description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:minHeight="25dp"
                 android:text="@string/artists"
                 android:textColor="@color/FlatWhite"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:ellipsize="end"
                 android:textSize="13sp"
                 android:alpha="0.9"
@@ -125,8 +126,8 @@
             android:id="@+id/play_all_icon"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:src="@drawable/ic_play_arrow_black_24dp"
-            android:tint="#BBFFCC00"
+            app:srcCompat="@drawable/ic_play_arrow_black_24dp"
+            android:tint="#BBFF9500"
             android:layout_marginStart="?attr/actionBarSize"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/play_all_button"
@@ -134,9 +135,7 @@
             android:paddingBottom="5dp"
             android:paddingStart="8dp"
             android:paddingEnd="0dp"
-            android:layout_marginLeft="?attr/actionBarSize"
-            android:paddingRight="0dp"
-            android:paddingLeft="8dp" />
+             />
             <TextView
                 android:id="@+id/play_all_button"
                 android:layout_width="wrap_content"
@@ -149,9 +148,8 @@
                 android:textStyle="bold"
                 android:paddingEnd="14dp"
                 android:paddingStart="0dp"
-                android:textColor="#BBFFCC00"
-                android:paddingLeft="0dp"
-                android:paddingRight="14dp" />
+                android:textColor="#BBFF9500"
+                 />
             <TextView
                 android:id="@+id/shuffle_play_button"
                 android:layout_width="wrap_content"
@@ -167,35 +165,35 @@
                 android:gravity="center"
                 android:text="@string/play_random"
                 android:textStyle="bold"
-                android:textColor="#BBFFCC00"
+                android:textColor="#BBFF9500"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@id/play_all_button" />
     </com.ldt.musicr.ui.widget.BlurImageViewChildConstraintLayout>
 
     </RelativeLayout>
 
-</android.support.design.widget.CollapsingToolbarLayout>
+</com.google.android.material.appbar.CollapsingToolbarLayout>
 
-</android.support.design.widget.AppBarLayout>
-    <android.support.v4.widget.SwipeRefreshLayout
+</com.google.android.material.appbar.AppBarLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
     <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
         android:id="@+id/playlist_big_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/minimum_bottom_back_stack_margin"
-        tools:listitem="@layout/item_song_child"
+        tools:listitem="@layout/item_song_normal"
         app:fastScrollAutoHide="true"
         app:fastScrollAutoHideDelay="1500"
         app:fastScrollPopupBackgroundSize="88dp"
-        app:fastScrollPopupBgColor="@color/FlatOrange"
+        app:fastScrollPopupBgColor="@color/flatOrange"
         app:fastScrollPopupPosition="adjacent"
         app:fastScrollPopupTextColor="@android:color/primary_text_dark"
         app:fastScrollPopupTextSize="46sp"
-        app:fastScrollThumbColor="@color/FlatOrange"
+        app:fastScrollThumbColor="@color/flatOrange"
        />
-    </android.support.v4.widget.SwipeRefreshLayout>
-</android.support.design.widget.CoordinatorLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

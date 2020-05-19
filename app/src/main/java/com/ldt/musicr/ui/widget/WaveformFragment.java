@@ -7,8 +7,8 @@ package com.ldt.musicr.ui.widget;
         import android.media.MediaPlayer;
         import android.os.Bundle;
         import android.os.Handler;
-        import android.support.annotation.Nullable;
-        import android.support.v4.app.Fragment;
+        import androidx.annotation.Nullable;
+        import androidx.fragment.app.Fragment;
         import android.text.Editable;
         import android.text.TextWatcher;
         import android.util.DisplayMetrics;
@@ -152,7 +152,7 @@ public abstract class WaveformFragment extends Fragment implements MarkerView.Ma
 
     /**
      * Every time we get a message that our waveform drew, see if we need to
-     * animate and trigger another redraw.
+     * animate and trigger another doDraw.
      */
     public void waveformDraw() {
         mWidth = mWaveformView.getMeasuredWidth();

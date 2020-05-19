@@ -10,9 +10,9 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.ldt.musicr.R;
-import com.ldt.musicr.ui.tabs.BaseLayerFragment;
+import com.ldt.musicr.ui.page.BaseLayerFragment;
 import com.ldt.musicr.ui.widget.gesture.SwipeDetectorGestureListener;
 import com.ldt.musicr.util.Animation;
 import com.ldt.musicr.util.Tool;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+
 
 /**
  *  Lớp điều khiển cách hành xử của một giao diện gồm các layer ui chồng lên nhau
@@ -43,7 +43,7 @@ import butterknife.ButterKnife;
  */
 public class LayerController {
     private static final String TAG = "LayerController";
-    public static int SINGLE_TAP_COMFIRM = 1;
+    public static int SINGLE_TAP_CONFIRM = 1;
     public static int SINGLE_TAP_UP = 3;
     public static int LONG_PRESSED = 2;
 
@@ -119,6 +119,13 @@ public class LayerController {
 
     @BindView(R.id.bottom_navigation_parent) View mBottomNavigationParent;
 
+    private void bindView(View view) {
+        mChildLayerContainer = view.findViewById(R.id.child_layer_container);
+        mBottomNavigationParent = view.findViewById(R.id.bottom_navigation_parent);
+        mBottomNavigationView = mBottomNavigationParent.findViewById(R.id.bottom_navigation_view);
+
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     public LayerController(AppCompatActivity activity) {
         this.activity =  activity;
@@ -149,32 +156,44 @@ public class LayerController {
         mGestureDetector = new GestureDetector(activity,mGestureListener);
 
     }
+    private long mStart = System.currentTimeMillis();
+    private void assign(Object mark) {
+        long current = System.currentTimeMillis();
+        Log.d(TAG, "logTime: Time "+ mark+" = "+(current - mStart));
+        mStart = current;
+    }
 
     public void init(FrameLayout layerContainer, BaseLayerFragment... fragments) {
+        assign(0);
         mLayerContainer = layerContainer;
 
-        ButterKnife.bind(this,layerContainer);
-
+        //ButterKnife.bind(this,layerContainer);
+        bindView(layerContainer);
+        assign("bind");
         mBaseLayers.clear();
 
         for (int i = 0; i < fragments.length; i++) {
-            BaseLayerFragment b = fragments[i];
-            addTabLayerFragment(b,0);
+            addTabLayerFragment(fragments[i],0);
+            assign("add base layer "+ i);
         }
 
         mLayerContainer.setVisibility(View.VISIBLE);
         float value = activity.getResources().getDimension(R.dimen.bottom_navigation_height);
-        mBottomNavigationParent.setTranslationY(value);
+
+       /* mBottomNavigationParent.setTranslationY(value);
         mBottomNavigationParent.animate().translationYBy(-value);
+        */
         for (int i = 0; i < mBaseAttrs.size(); i++) {
-            mBaseAttrs.get(i).animateOnInit();
+            mBaseAttrs.get(i).initImmediately();
         }
+
+        assign(3);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ObjectAnimator.ofArgb(mLayerContainer,"backgroundColor",0,0x11000000).setDuration(350).start();
         } else {
             ObjectAnimator.ofObject(mLayerContainer, "backgroundColor", new ArgbEvaluator(), 0,0x11000000).setDuration(350).start();
         }
-
+        assign(4);
     }
 
 
@@ -261,7 +280,6 @@ public class LayerController {
 
             pcOfFocusLayer_End = a.getPercent();
         }
-
 
         for(int item = 1; item < activeSize; item++) {
 
@@ -569,7 +587,7 @@ public class LayerController {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
        //     Toast.makeText(activity,"single tap confirmed",Toast.LENGTH_SHORT).show();
-            if(isLayerAvailable()) return layer.onGestureDetected(SINGLE_TAP_COMFIRM);
+            if(isLayerAvailable()) return layer.onGestureDetected(SINGLE_TAP_CONFIRM);
             return super.onSingleTapConfirmed(e);
         }
     }
@@ -673,9 +691,9 @@ public class LayerController {
             return;
         }
        inCountDownTime = true;
-        Tool.showToast(activity,"Back again to exit",500);
+        Tool.showToast(activity,activity.getString(R.string.alert_ext),350);
 
-        if(countDownTimer==null) countDownTimer = new CountDownTimer(2000,2000) {
+        if(countDownTimer==null) countDownTimer = new CountDownTimer(1500,1500) {
             @Override
             public void onTick(long l) {
 
@@ -685,7 +703,6 @@ public class LayerController {
             public void onFinish() {
                 countDownTimer = null;
                 inCountDownTime = false;
-                Tool.showToast(activity,"exit cancelAndUnBind",500);
             }
         };
         countDownTimer.start();
@@ -760,12 +777,21 @@ public class LayerController {
             return getMaxPosition() - mCurrentTranslate + mScaleDeltaTranslate;
         }
 
+        public void animateAndGone() {
+
+        }
+
         public void animateOnInit() {
             parent.setTranslationY(getMaxPosition());
             parent.animate().translationYBy(-getMaxPosition()+getRealTranslateY()).setDuration((long) (350 + 150f/ScreenSize[1]*minPosition)).setInterpolator(Animation.sInterpolator);
           //  parent.animate().translationYBy(-getMaxPositionType()+getRealTranslateY()).setDuration(computeSettleDuration(0,(int) Math.abs(-getMaxPositionType() + getRealTranslateY()),0,(int)getMaxPositionType())).setInterpolator(Animation.sInterpolator);
             mCurrentTranslate = minPosition;
         }
+
+        public void initImmediately() {
+            parent.setTranslationY(getRealTranslateY());
+        }
+
         public Attr setCurrentTranslate(float current) {
             mCurrentTranslate = current;
             if(mCurrentTranslate>getMaxPosition()) mCurrentTranslate = getMaxPosition();
@@ -780,6 +806,7 @@ public class LayerController {
                mBaseLayers.get(mGestureListener.item).onTranslateChanged(this);
             updateLayerChanged();
         }
+
         public void shakeOnMax(float _value) {
             float value = 10*oneDp + _value;
             if(value>30*oneDp) value = 30*oneDp;
@@ -787,6 +814,7 @@ public class LayerController {
             animateTo(mCurrentTranslate -value);
             mBottomNavigationParent.postDelayed(this::animateToMax,300);
         }
+
 
         public void animateTo(float selfTranslateY) {
             if(selfTranslateY== mCurrentTranslate) return;
@@ -817,6 +845,7 @@ public class LayerController {
                 parent.animate().translationY(getRealTranslateY()).setDuration((long) (350 + 150f/ScreenSize[1]*minPosition)).setInterpolator(Animation.sInterpolator);
             }
         }
+
         private int computeSettleDuration( int dx, int dy, int xvel, int yvel) {
             xvel = clampMag(xvel, (int) mMinVelocity, (int) mMaxVelocity);
             yvel = clampMag(yvel, (int) mMinVelocity, (int) mMaxVelocity);

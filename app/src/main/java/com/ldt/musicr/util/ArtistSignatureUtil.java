@@ -3,7 +3,7 @@ package com.ldt.musicr.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.bumptech.glide.signature.ObjectKey;
@@ -48,9 +48,8 @@ public class ArtistSignatureUtil {
         return mPreferences.getLong(artistName, 0);
     }
 
-    public ObjectKey getArtistSignature(String artistName, boolean isLoadOriginal) {
+    public ObjectKey getArtistSignature(String artistName, boolean isLoadOriginal, int whichImage) {
         String value = String.valueOf(getArtistSignatureRaw(artistName));
-        Log.d(TAG, "getArtistSignature: "+value);
-        return new ObjectKey(artistName+"_"+"original="+isLoadOriginal+"_"+String.valueOf(getArtistSignatureRaw(artistName)));
+        return new ObjectKey(artistName+"_"+"original="+isLoadOriginal+"_"+"pos="+whichImage+"_"+String.valueOf(getArtistSignatureRaw(artistName)));
     }
 }

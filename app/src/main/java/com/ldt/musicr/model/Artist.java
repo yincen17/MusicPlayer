@@ -2,13 +2,15 @@ package com.ldt.musicr.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ldt.musicr.util.MusicUtil;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
-public class Artist implements Parcelable {
+public class Artist extends Media implements Parcelable {
     public static final String UNKNOWN_ARTIST_DISPLAY_NAME = "Unknown Artist";
 
     public final ArrayList<Album> albums;
@@ -74,6 +76,7 @@ public class Artist implements Parcelable {
         return albums != null ? albums.hashCode() : 0;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "Artist{" +

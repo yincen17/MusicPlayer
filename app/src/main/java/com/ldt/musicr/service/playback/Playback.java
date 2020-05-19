@@ -1,6 +1,6 @@
 package com.ldt.musicr.service.playback;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -31,7 +31,9 @@ public interface Playback {
 
     int seek(int whereto);
 
-    boolean setVolume(float vol);
+/*    boolean setVolume(float vol);*/
+
+    boolean setVolume(float l, float r);
 
     boolean setAudioSessionId(int sessionId);
 

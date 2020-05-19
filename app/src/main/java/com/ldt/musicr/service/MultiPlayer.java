@@ -7,8 +7,8 @@ import android.media.MediaPlayer;
 import android.media.audiofx.AudioEffect;
 import android.net.Uri;
 import android.os.PowerManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -261,14 +261,23 @@ public class MultiPlayer implements Playback, MediaPlayer.OnErrorListener, Media
         }
     }
 
+    private float mLeftVolume = 1f;
+    private float mRightVolume = 1f;
+
     @Override
-    public boolean setVolume(final float vol) {
+    public boolean setVolume(final float l, final float r) {
         try {
-            mCurrentMediaPlayer.setVolume(vol, vol);
+            mCurrentMediaPlayer.setVolume(l, r);
+            mLeftVolume = l;
+            mRightVolume = r;
             return true;
         } catch (IllegalStateException e) {
             return false;
         }
+    }
+
+    public void updateVolume() {
+        setVolume(mLeftVolume, mRightVolume);
     }
 
     /**
@@ -304,6 +313,7 @@ public class MultiPlayer implements Playback, MediaPlayer.OnErrorListener, Media
         mIsInitialized = false;
         mCurrentMediaPlayer.release();
         mCurrentMediaPlayer = new MediaPlayer();
+        updateVolume();
         mCurrentMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
         if (context != null) {
             Toast.makeText(context, context.getResources().getString(R.string.unplayable_file), Toast.LENGTH_SHORT).show();

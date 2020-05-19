@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -46,10 +46,10 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:gravity="center"
-            android:textColor="@color/FlatYellow"
+            android:textColor="@color/flatOrange"
             android:background="@drawable/count_round_drawable"/>
         <TextView
-            android:id="@+id/more"
+            android:id="@+id/menu_button"
             android:layout_width="wrap_content"
             android:paddingRight="15dp"
             android:paddingLeft="15dp"
@@ -62,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="@id/back_top_header"
             app:layout_constraintEnd_toEndOf="parent"
             />
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,4 +74,4 @@
         tools:layoutManager="LinearLayoutManager"
         android:paddingStart="8dp"
         android:paddingLeft="8dp" />
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
